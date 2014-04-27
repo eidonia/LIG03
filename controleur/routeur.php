@@ -26,7 +26,6 @@ try {
 	if (isset($_GET['page'])){ 			// Test $_GET
 		// On récupère action=XX
 		$action=strtolower($_GET['page']);
-var_dump($action);
 		require $action.'.php';
 	}
 	else{

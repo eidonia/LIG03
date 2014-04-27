@@ -35,7 +35,7 @@ function contenu($donnees){
 			}
 			echo '</select>';
 			echo ' éléments ';
-			echo '<input type="Submit" value="Ajouter…">';
+			echo '<button type="Submit" class="btn btn-default">Ajouter…';
 			echo '</form>';
 		}
 		echo '</div>';
