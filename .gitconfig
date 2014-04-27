@@ -1,0 +1,8 @@
+[user]
+	email = tr4sk@biboum.fr
+	name = Alexandre Novakovski
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+	br = branch

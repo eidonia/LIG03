@@ -1,0 +1,9 @@
+# swap files
+*.swp
+
+# SQL password file
+modele/sql.class.php
+
+# htaccess files
+.htaccess
+.htpasswd
