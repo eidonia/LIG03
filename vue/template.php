@@ -17,9 +17,9 @@
 				<div class="container">
 				<ul class="nav navbar-nav">
 					<li><a href="index.php" class="navbar-brand"><img src="vue/image/logo.png"></a></li>
-					<li><a href="index.php">Accueil</a></li>
-					<li><a href="?page=shop">Shop</a></li>
-					<li><a href="?page=contact">Contact</a></li>
+					<li><a href="index.php"><span class="glyphicon glyphicon-home">Accueil</span></a></li>
+					<li><a href="?page=shop"><span class="glyphicon glyphicon-shopping-cart">Shop</span></a></li>
+					<li><a href="?page=contact"><span class="glyphicon glyphicon-headphones">Contact</span></a></li>
 				</ul>
 				</div>
 			</nav>
@@ -43,6 +43,7 @@
 			</aside>
 		</section>
 		<footer>
+		<hr>
 			<!-- Footer start -->
 			<?= footer($dFooter) ?>
 			<!-- Footer end-->
