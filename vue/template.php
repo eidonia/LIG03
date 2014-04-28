@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<script src="js/bootstrap.min.js"></script>
 		<title><?= titre($dTitre) ?></title>
 	</head>
 
@@ -13,9 +13,10 @@
 	<div class="container">
 		<header>
 			<!-- Header start -->
-			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="container">
 				<ul class="nav navbar-nav">
+					<li><a href="index.php" class="navbar-brand"><img src="vue/image/logo.png"></a></li>
 					<li><a href="index.php">Accueil</a></li>
 					<li><a href="?page=shop">Shop</a></li>
 					<li><a href="?page=contact">Contact</a></li>
@@ -47,5 +48,9 @@
 			<!-- Footer end-->
 		</footer>
 	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//code.jquery.com/jquery.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
