@@ -8,24 +8,24 @@ function contenu($donnees){
 		$produit["nom"] = htmlspecialchars($produit["nom"]);
 		$produit["description"] = htmlspecialchars($produit["description"]);
 	}
-	echo '<table class="table table-hover">';
-	echo '<thead>';
-	echo '<tr>';
-	echo '<th>#</th>';
-	echo '<th>Produit</th>';
-	echo '<th>Prix</th>';
-	echo '</tr>';
-	echo '</thead>';
+	echo '<div class="row">';
 	// Affiche la liste des produits
 	foreach($donnees as $key => $produit)
 	{
-		echo '<tr data-href="'. $produit["id"] .'">';
-		echo '<td><img src="vue/image/produit/'. $produit["image"] .'" alt='. $produit["nom"] .'/></td>';
-		echo '<td>'. $produit["nom"] .'</td>';
-		echo '<td>'. $produit["prix"] .'€</td>';
-		echo '</tr>';
+		echo '<div class="col-md-10">';
+		echo '<a href=?page=shop&produit='. $produit["id"] .'>';
+		echo '<div class="col-md-3">';
+		echo '<img src="vue/image/produit/'. $produit["image"] .'" alt='. $produit["nom"] .'/>';
+		echo '</div>';
+		echo '<div class="col-md-5">';
+		echo $produit["nom"];
+		echo '</div>';
+		echo '<div class="col-md-2">';
+		echo $produit["prix"] .'€';
+		echo '</div>';
+		echo '</div>';
 	}
-	echo '</table>';
+	echo '</div>';
 }
 
 ?>

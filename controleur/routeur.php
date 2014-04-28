@@ -1,7 +1,7 @@
 <?php
 
-session_start(); 					// Démarrage de la session
 
+// Test de session
 $_SESSION['nom'] = 'Alex';
 
 // $_SESSION['panier']['id'] = ['idProduit']['nom']['prix']['nb']
