@@ -24,20 +24,24 @@
 		</header>
 		
 		<section>
-			<div>
-			<!-- Body start -->
-				<article>
-					<!-- News start -->
-					<?= contenu($dContenu) ?>
-					<!-- News end -->
-				</article>
-			</div>
+			<div class="row">
+				<div class="col-md-8">
+				<!-- Body start -->
+					<article>
+						<!-- News start -->
+						<?= contenu($dContenu) ?>
+						<!-- News end -->
+					</article>
+				</div>
 
-			<aside>
-				<!-- RightBlock start -->
-				<?= blocDroit() ?>
-				<!-- RightBlock end -->
-			</aside>
+				<aside>
+				<div class="col-md-4">
+					<!-- RightBlock start -->
+					<?= blocDroit() ?>
+					<!-- RightBlock end -->
+				</div>
+				</aside>
+			</div>
 		</section>
 		<footer>
 		<hr>

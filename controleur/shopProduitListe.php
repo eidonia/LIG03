@@ -12,18 +12,19 @@ function contenu($donnees){
 	// Affiche la liste des produits
 	foreach($donnees as $key => $produit)
 	{
-		echo '<div class="col-md-10">';
-		echo '<a href=?page=shop&produit='. $produit["id"] .'>';
-		echo '<div class="col-md-3">';
-		echo '<img src="vue/image/produit/'. $produit["image"] .'" alt='. $produit["nom"] .'/>';
-		echo '</div>';
-		echo '<div class="col-md-5">';
-		echo $produit["nom"];
-		echo '</div>';
-		echo '<div class="col-md-2">';
-		echo $produit["prix"] .'€';
-		echo '</div>';
-		echo '</div>';
+		echo 	'<div class="row">'
+			.'	<a href=?page=shop&produit='. $produit["id"] .'>'
+			.'	<div class="col-md-3">'
+			.'		<img src="vue/image/produit/'. $produit["image"] .'" alt='. $produit["nom"] .'/>'
+			.'	</div>'
+			.'	<div class="col-md-7">'.
+					$produit["nom"]
+			.'	</div>'
+			.'	<div class="col-md-2">'.
+					$produit["prix"] .'€'
+			.'	</div>'
+			.'	</a>'
+			.'</div>';
 	}
 	echo '</div>';
 }

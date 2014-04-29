@@ -1,46 +1,83 @@
 <?php
-function contenu($donnees){
-	// Les données sont transmit via un objet
-
-	// On commence par nettoyer les données affiché
-	foreach($donnees as $key => $produit)
+if(($_GET["action"] == "addtocart") && (isset($_POST["nb"])))
+{
+	$id = $produit->id();
+	$nb = htmlspecialchars($_POST["nb"]);
+	$nb = (int)$nb;
+	if($nb > 0 && $id > 0)
 	{
-		$produit["nom"] = htmlspecialchars($produit["nom"]);
-		$produit["description"] = htmlspecialchars($produit["description"]);
-	}
-	echo '<div class="produitListe">';
-
-	// Affiche la liste des produits
-	foreach($donnees as $key => $produit)
-	{
-		echo '<div class="produit">';
-		echo '<h1>'. $produit["nom"] .'</h1>';
-		echo '<img src="vue/image/categorie/'. $produit["image"] .'" alt='. $produit["nom"] .'/>';
-		echo '<p>'. $produit["description"] .'</p>';
-		if($produit["stock"] == 0)
+		if(isset($_SESSION["panier"][$id]))
 		{
-			echo "Ce produit n'est plus disponible";
+			$_SESSION["panier"][$id]["nb"] += $nb;
 		}
 		else
 		{
-			echo 'Stock : <FONT color="green">'. $produit["stock"] .'</FONT>';
-			echo '<form method=post action=".">';
-			echo 'Ajouter au panier : ';
-			echo '<select>';
-			$i = 1;
-			while($i <= $produit["stock"] && $i <= 5)
-			{
-				echo '<option>'. $i .'</option>';
-				$i++;
-			}
-			echo '</select>';
-			echo ' éléments ';
-			echo '<button type="Submit" class="btn btn-default">Ajouter…';
-			echo '</form>';
+			$_SESSION["panier"][$id]["nom"] = $produit->nom();
+			$_SESSION["panier"][$id]["prix"] = $produit->prix();
+			$_SESSION["panier"][$id]["nb"] = $nb;
 		}
-		echo '</div>';
 	}
-	echo '</div>';
 }
+
+
+
+
+
+
+function contenu($produit){
+	// Les données sont transmit via un objet
+
+	// On commence par nettoyer les données affiché
+	
+	echo '<div class="row">';
+	// Affiche le produit
+	echo	'<div class="row">'
+		.'	<div class="col-md-12">'
+		.'		<h1>'. $produit->nom() .'</h1>'
+		.'	</div>'
+		.'</div>'
+		.'<div class="row">'
+		.'	<div class="col-md-2">'
+		.'		<img src="vue/image/produit/'. $produit->image() .'" alt='. $produit->nom() .' class="img-thumbnail"/>'
+		.'	</div>'
+		.'	<div class="col-md-10">'
+		.'		<p>'. $produit->description() .'</p>'
+		.'	</div>'
+		.'</div>';
+	if($produit->stock() == 0)
+	{
+		echo 	'<div class="row">'
+			.'	<div class="col-md-4">'
+			.'		<button class="bg-danger">Produit non disponible</p>'
+			.'	</div>'
+			.'</div>';
+	}
+	else
+	{
+		$bg = ($produit->stock() < 10) ? "bg-warning" : "bg-success";
+		echo 	'<div class="row">'
+			.'	<div class="col-md-2">'
+			.'		<p class="'. $bg .'">'. $produit->stock() .' restants.</p>'
+			.'	</div>'
+			.'	<div class="col-md-5 col-md-offset-5">'
+			.'		<form method="post" action="?page=shop&produit='. $produit->id() .'&action=addtocart">'
+			.'			Ajouter au panier : '
+			.'			<select name="nb">';
+		$i = 1;
+		while($i <= $produit->stock() && $i <= 5)
+		{
+			echo '<option>'. $i .'</option>';
+			$i++;
+		}
+		echo 	'			</select>'
+			.' 			éléments '
+			.'			<button type="submit" class="btn btn-success">Ajouter…</button>'
+			.'		</form>'
+			.'	</div>'
+			.'</div>';
+	}
+}
+echo '</div>';
+
 
 ?>

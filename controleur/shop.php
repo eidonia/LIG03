@@ -15,9 +15,10 @@ if(isset($_GET["cat"])){
 	require ('controleur/shopProduitListe.php');
 }
 elseif(isset($_GET["produit"])){
+	$id = isset($_GET["produit"]) ? (int)$_GET["produit"] : "0";
 	$produit = new Produit();
-	$produit = $produit->getProduit($_GET["produit"]);
-	$dTitre = $produit[0]["nom"];
+	$produit->getProduit($id);
+	$dTitre = $produit->nom();
 	$dContenu = $produit;
 	$dFooter = $dFooter;
 	require ('controleur/shopProduit.php');
