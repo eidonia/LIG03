@@ -8,6 +8,7 @@ class User
 	private $_pass;
 	private $_nom;
 	private $_prenom;
+	private $_mail;
 	private $_adresse;
 	private $_codepostale;
 	private $_ville;
@@ -39,6 +40,10 @@ class User
 	public function prenom()
 	{
 		return $this->_prenom;
+	}
+	public function mail()
+	{
+		return $this->_mail;
 	}
 	public function adresse()
 	{
@@ -85,6 +90,10 @@ class User
 	{
 		$this->_prenom = $val;
 	}
+	public function setMail($val)
+	{
+		$this->_prenom = $val;
+	}
 	public function setAdresse($val)
 	{
 		$this->_adresse = $val;
@@ -110,8 +119,37 @@ class User
 	{
 		$this->_sessionID = $val;
 	}
-
-
+	
+	public function getUserId($mail)
+	{
+		$db = new PDOConfig();
+		try{
+			$sql = 'SELECT userId FROM user WHERE userMail = "'. $mail .'"';
+			foreach($db->query($sql) as $row)
+			{
+				if(isset($row))
+					$this->getUser($row["userId"]);
+			}
+		}catch(Exception $e)
+		{
+			echo $e;
+		}
+	}
+	public function getSessionId($id)
+	{
+		$db = new PDOConfig();
+		try{
+			$sql = 'SELECT userId FROM user WHERE userSessionID = "'. $id .'"';
+			foreach($db->query($sql) as $row)
+			{
+				if(isset($row))
+					$this->getUser($row["userId"]);
+			}
+		}catch(Exception $e){
+		echo $e;
+		}
+		
+	}
 
 	public function getUser($id)
 	{
@@ -119,18 +157,24 @@ class User
 		$id = isset($id) ? (int)$id : NULL;
 		if(isset($id))
 		{
+			$this->setId($id);
 			$sql = 'SELECT userLogin, userPass, userNom, userPrenom, userAdresse,'
-			.' userCodePostale, userVille, userPays, userGroup, userAvatar, userSessionID FROM user WHERE userId = '. $id;
+			.' userCodePostale, userVille, userPays, userAvatar, userSessionID FROM user WHERE userId = '. $this->id();
 			foreach($db->query($sql) as $row)
 			{
-				$taille = strlen($row);
-				$method = substr($row, 4, ($taille - 4));
-				$method = 'set'.$method;
-var_dump($row);
-				if(method_exists($this, $method))
+				if(isset($row))
 				{
-					$this->$method($row['user'. $method]);
+					$this->setLogin($row['userLogin']);
+					$this->setPass($row['userPass']);
+					$this->setNom($row['userNom']);
+					$this->setPrenom($row['userPrenom']);
+					$this->setAdresse($row['userAdresse']);
+					$this->setCodePostale($row['userCodePostale']);
+					$this->setVille($row['userVille']);
+					$this->setPays($row['userPays']);
+					$this->setAvatar($row['userAvatar']);
 				}
+					
 			}
 		}
 		else

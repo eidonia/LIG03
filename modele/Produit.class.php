@@ -79,30 +79,36 @@ class Produit
 
 	public function getProduit($id)
 	{
-		$this->setDb();
-		$id = isset($id) ? (int)$id : 0;
-		$q = $this->_db->prepare('SELECT id, nom, description, prix, image, stock, categorieID FROM produit WHERE id = '. $id);
-		$q->execute();
-		$produit = $q->fetchAll();
-		foreach($produit[0] as $key => $value)
+		$db = new PDOConfig();
+		$id = isset($id) ? (int)$id : NULL;
+		if(isset($id))
 		{
-			$method = $key;
-			$method = ucfirst($method);
-			$method = 'set'.$method;
-			if(method_exists($this, $method))
-				$this->$method($value);
+			$sql = 'SELECT id, nom, description, prix, image, stock, categorieID FROM produit WHERE id = '. $id;
+			foreach($db->query($sql) as $row)
+			{
+				if(isset($row))
+				{
+					$this->setId($row['id']);
+					$this->setNom($row['nom']);
+					$this->setDescription($row['description']);
+					$this->setPrix($row['prix']);
+					$this->setStock($row['stock']);
+					$this->setCategorieID($row['categorieID']);
+				}	
+			}
 		}
 	}
 
 	public function getList($offset, $limit, $id)
 	{
-		$this->setDb();
+		$db = new PDOConfig();
 		$offset = isset($offset) ? (int) $offset : 0;
 		$limit = isset($limit) ? (int)$limit : 10;
 		$id = isset($id) ? (int)$id : 0;
-		$q = $this->_db->prepare('SELECT id, nom, description, prix, stock, image FROM produit WHERE categorieID = '. $id .' ORDER BY id DESC LIMIT '. $offset .','. $limit);
-		$q->execute();
-		$list = $q->fetchAll();
+		$sql = 'SELECT id, nom, description, prix, stock, image FROM produit WHERE categorieID = '. $id .' ORDER BY id DESC LIMIT '. $offset .','. $limit;
+		$result = $db->prepare($sql);
+		$result->execute();
+		$list = $result->fetchAll();
 		return $list;
 	}
 

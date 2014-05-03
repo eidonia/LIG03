@@ -1,5 +1,8 @@
 <?php
-if(($_GET["action"] == "addtocart") && (isset($_POST["nb"])))
+
+$action = (isset($_GET["action"])) ? $_GET["action"] : '';
+
+if(($action == "addtocart") && (isset($_POST["nb"])))
 {
 	$id = $produit->id();
 	$nb = htmlspecialchars($_POST["nb"]);
@@ -18,7 +21,6 @@ if(($_GET["action"] == "addtocart") && (isset($_POST["nb"])))
 		}
 	}
 }
-
 
 
 

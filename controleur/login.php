@@ -15,8 +15,8 @@ function estConnecte()
 	if(isset($id))
 	{
 		$user = new User();
-		$user->getUser(1);
-		if($user->sessionID == $id)
+		$user->getSessionId($id);
+		if($user->sessionID() == $id)
 			return True;
 		else
 			return False;
@@ -28,13 +28,12 @@ function estConnecte()
 }
 
 
-function login($id, $login, $pass)
+function login($login, $pass)
 {
-	$id = isset($id) ? (int)$id : 0;
-	$login = isset($login) ? htmlspecialchars($login) : 0;
-	$pass = isset($pass) ? htmlspecialchars($pass) : 0;
+	$login = isset($login) ? htmlspecialchars($login) : NULL;
+	$pass = isset($pass) ? htmlspecialchars($pass) : NULL;
 	$user = new User();
-	$user->getUser($id);
+	$user->getUserId($id);
 	if(($user->login() == $login) && ($user->pass() == $pass))
 	{
 		echo 'Bienvenu '. $user->prenom();

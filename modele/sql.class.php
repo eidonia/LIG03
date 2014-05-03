@@ -8,7 +8,6 @@ try {
 	':dbname='. $settings['database']['dbname'] .
 	';host=' .$settings['database']['host'] .
 	((!empty($setting['database']['port'])) ? (';port=' . $settings['database']['port']) : '');
-var_dump($dsn);
 	parent::__construct($dsn , $settings['database']['username'], $settings['database']['password']);
 } catch (PDOException $e){
 echo $e->getMessage();

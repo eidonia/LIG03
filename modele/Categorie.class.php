@@ -52,19 +52,13 @@ class Categorie
 	
 	public function getCategorie($offset, $limit)
 	{
-		$this->setDB();
+		$db = new PDOConfig();
 		$offset = isset($offset) ? (int) $offset : '0';
 		$limit = isset($limit) ? (int) $limit : '10';
-		$q = $this->_db->prepare('SELECT id, nom, contenu, image FROM categorie ORDER BY id DESC LIMIT :offset, :limit');
-		$q->bindParam(':offset', $offset, PDO::PARAM_INT);
-		$q->bindParam(':limit', $limit, PDO::PARAM_INT);
-		$q->execute();
-		$list = $q->fetchAll();
+		$sql = 'SELECT id, nom, contenu, image FROM categorie ORDER BY id DESC LIMIT '. $offset .', '. $limit;
+		$result = $db->prepare($sql);
+		$result->execute();
+		$list = $result->fetchAll();
 		return $list;
-	}
-	
-	public function setDb()
-	{
-		$this->_db = sql::getBdd();
 	}
 }

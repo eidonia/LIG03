@@ -1,6 +1,8 @@
 <?php
 require_once ('controleur/login.php');
 
+
+
 function blocDroit(){
 	echo '<div class="row">';
 	echo '<div class="col-md-12">';
@@ -48,6 +50,7 @@ function blocDroit(){
 	echo '<div class="col-md-12">';
 	if(isset($_SESSION['panier'])){
 		echo '<div class="col-md-12">';
+		
 		foreach($_SESSION['panier'] as $i => $id){
 			echo '<a href="?page=shop&produit='. $id["idProduit"] .'">';
 			echo '<div class="col-md-1">'. $id["nb"] .'</div>';
@@ -55,7 +58,7 @@ function blocDroit(){
 			echo '<div class="col-md-1">'. $id["prix"] .'</div>';
 			echo '</a>';
 		}
-	echo '</div>';
+		echo '</div>';
 	}
 	else{
 		echo '<p>Votre panier est vide</p>';
