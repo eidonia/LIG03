@@ -115,25 +115,21 @@ class User
 
 	public function getUser($id)
 	{
-		$this->setDb();
-		$id = isset($id) ? (int)$id : 0;
-		if($id > 0)
+		$db = new PDOConfig();
+		$id = isset($id) ? (int)$id : NULL;
+		if(isset($id))
 		{
-			$q = $this->_db->prepare('SELECT userLogin, userPass, userNom, userPrenom, userAdresse,'
-			.' userCodePostale, userVille, userPays, userGroup, userAvatar, userSessionID FROM user WHERE userId = '. $id);
-			$q->execute();
-			$user = $q->fetchAll();
-			foreach($user as $key => $data)
+			$sql = 'SELECT userLogin, userPass, userNom, userPrenom, userAdresse,'
+			.' userCodePostale, userVille, userPays, userGroup, userAvatar, userSessionID FROM user WHERE userId = '. $id;
+			foreach($db->query($sql) as $row)
 			{
-				foreach($data as $key => $value)
+				$taille = strlen($row);
+				$method = substr($row, 4, ($taille - 4));
+				$method = 'set'.$method;
+var_dump($row);
+				if(method_exists($this, $method))
 				{
-					$taille = strlen($key);
-					$method = substr($key, 4, ($taille - 4));
-					$method = 'set'.$method;
-					if(method_exists($this, $method))
-					{
-						$this->$method($value);
-					}
+					$this->$method($row['user'. $method]);
 				}
 			}
 		}
@@ -152,6 +148,7 @@ class User
 		.' userCodePostale, userVille, userPays, userGroup, userAvatar FROM user ORDER BY id DESC LIMIT '. $offset .','. $limit);
 		$q->execute();
 		$list = $q->fetchAll();
+		$q->closeCursor();
 		return $list;
 	}
 

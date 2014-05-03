@@ -11,11 +11,11 @@ include_once ('modele/User.class.php');
 
 function estConnecte()
 {
-	$id = (NULL !== session_id()) ? session_id() : 0;
-	if($id > 0)
+	$id = (NULL !== session_id()) ? session_id() : NULL;
+	if(isset($id))
 	{
 		$user = new User();
-		$user->getUser($id);
+		$user->getUser(1);
 		if($user->sessionID == $id)
 			return True;
 		else
