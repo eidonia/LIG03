@@ -11,7 +11,6 @@ if(isset($_GET["cat"])){
 	$cat = $cat->getList(0, 5, $_GET["cat"]);
 	$dTitre = "Sélectionnez un propuit";
 	$dContenu = $cat;
-	$dFooter = $dFooter;
 	require ('controleur/shopProduitListe.php');
 }
 elseif(isset($_GET["produit"])){
@@ -20,7 +19,6 @@ elseif(isset($_GET["produit"])){
 	$produit->getProduit($id);
 	$dTitre = $produit->nom();
 	$dContenu = $produit;
-	$dFooter = $dFooter;
 	require ('controleur/shopProduit.php');
 
 }
@@ -29,7 +27,6 @@ else{
 	$cat = $cat->getCategorie(0, 5);
 	$dTitre = "Sélectionnez une catégorie";
 	$dContenu = $cat;
-	$dFooter = $dFooter;
 	require_once('controleur/shopCategorie.php');
 }
 

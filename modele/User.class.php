@@ -15,7 +15,6 @@ class User
 	private $_pays;
 	private $_avatar;
 	private $_sessionID;
-	private $_db; // Instance PDO
 	
 	public function __construct()
 	{
@@ -92,7 +91,7 @@ class User
 	}
 	public function setMail($val)
 	{
-		$this->_prenom = $val;
+		$this->_mail = $val;
 	}
 	public function setAdresse($val)
 	{
@@ -120,37 +119,6 @@ class User
 		$this->_sessionID = $val;
 	}
 	
-	public function getUserId($mail)
-	{
-		$db = new PDOConfig();
-		try{
-			$sql = 'SELECT userId FROM user WHERE userMail = "'. $mail .'"';
-			foreach($db->query($sql) as $row)
-			{
-				if(isset($row))
-					$this->getUser($row["userId"]);
-			}
-		}catch(Exception $e)
-		{
-			echo $e;
-		}
-	}
-	public function getSessionId($id)
-	{
-		$db = new PDOConfig();
-		try{
-			$sql = 'SELECT userId FROM user WHERE userSessionID = "'. $id .'"';
-			foreach($db->query($sql) as $row)
-			{
-				if(isset($row))
-					$this->getUser($row["userId"]);
-			}
-		}catch(Exception $e){
-		echo $e;
-		}
-		
-	}
-
 	public function getUser($id)
 	{
 		$db = new PDOConfig();
@@ -159,7 +127,8 @@ class User
 		{
 			$this->setId($id);
 			$sql = 'SELECT userLogin, userPass, userNom, userPrenom, userAdresse,'
-			.' userCodePostale, userVille, userPays, userAvatar, userSessionID FROM user WHERE userId = '. $this->id();
+			.' userCodePostale, userVille, userPays, userAvatar, userSessionID, userMail'
+			.' FROM user WHERE userId = '. $this->id();
 			foreach($db->query($sql) as $row)
 			{
 				if(isset($row))
@@ -173,6 +142,8 @@ class User
 					$this->setVille($row['userVille']);
 					$this->setPays($row['userPays']);
 					$this->setAvatar($row['userAvatar']);
+					$this->setMail($row['userMail']);
+					$this->setSessionId($row['userSessionID']);
 				}
 					
 			}
@@ -185,19 +156,54 @@ class User
 
 	public function getList($offset, $limit)
 	{
-		$this->setDb();
+		$db = new PDOConfig();
 		$offset = isset($offset) ? (int) $offset : 0;
 		$limit = isset($limit) ? (int)$limit : 10;
-		$q = $this->_db->prepare('SELECT userId, userLogin, userPass, userNom, userPrenom, userAdresse,'
-		.' userCodePostale, userVille, userPays, userGroup, userAvatar FROM user ORDER BY id DESC LIMIT '. $offset .','. $limit);
-		$q->execute();
-		$list = $q->fetchAll();
-		$q->closeCursor();
+		$sql = 'SELECT userId, userLogin, userPass, userNom, userPrenom, userAdresse,'
+		.' userCodePostale, userVille, userPays, userGroup, userAvatar FROM user ORDER BY id DESC LIMIT '. $offset .','. $limit;
+		$db->query($sql);
+		$list = $db->fetchAll();
 		return $list;
 	}
-
-	private function setDb()
+	
+	public function update()
 	{
-		$this->_db = sql::getBdd();
+		$db = new PDOConfig();
+		$sql =	'UPDATE user SET'
+			.' userLogin = "'. $this->login() .'",'
+			.' userPass = "'. $this->pass() .'",'
+			.' userPrenom = "'. $this->prenom() .'",'
+			.' userNom = "'. $this->nom() .'",'
+			.' userMail = "'. $this->mail() .'",'
+			.' userAdresse = "'. $this->adresse() .'",'
+			.' userVille = "'. $this->ville() .'",'
+			.' userCodePostale = "'. $this->codePostale() .'",'
+			.' userPays = "'. $this->pays() .'",'
+			.' userAvatar = "'. $this->avatar() .'",'
+			.' userSessionID = "'. $this->sessionID() .'"'
+			.' WHERE userId = "'. $this->id() .'"';
+		var_dump($sql);
+		$db->exec($sql);
+	}
+
+	public function insert()
+	{
+		$db = new PDOConfig();
+		$sql =	'INSERT INTO user'
+			.'(userLogin, userPass, userPrenom, userNom, userMail, userAdresse, userVille, userCodePostale, userPays, userAvatar, userSessionID)'
+			.' VALUES '
+			.'("'. $this->login() .'", '
+			.'"'. $this->pass() .'", '
+			.'"'. $this->prenom() .'", '
+			.'"'. $this->nom() .'", '
+			.'"'. $this->mail() .'", '
+			.'"'. $this->adresse() .'", '
+			.'"'. $this->ville() .'", '
+			.'"'. $this->codePostale() .'", '
+			.'"'. $this->pays() .'", '
+			.'"'. $this->avatar() .'", '
+			.'"'. $this->sessionID() .')';
+		var_dump($sql);
+		//$db->exec($sql);
 	}
 }

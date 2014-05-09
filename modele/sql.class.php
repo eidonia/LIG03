@@ -1,4 +1,5 @@
 <?php
+
 class PDOConfig extends PDO{
 
 	public function __construct($file = 'config/sql.conf'){

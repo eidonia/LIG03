@@ -9,50 +9,25 @@ function blocDroit(){
 	// BLOC LOGIN
 	// Connecté ?
 
-	if(estConnecte())
+	if(NULL !== $_SESSION["user"])
 	{
-		echo $_SESSION["user"];
+		require('vue/logged.php');
 	}
 	else
 	{
-		echo '<form class="form-horizontal" role="form">									';
-		echo '	<div class="form-group">											';
-		echo '		<label for="inputEmail" class="col-md-3 control-label">Login</label>					';
-		echo '		<div class="col-md-9">											';
-		echo '			<input type="email" class="form-control" id="inputEmail" placeholder="Email">			';
-		echo '		</div>													';
-		echo '	</div>														';
-		echo '	<div class="form-group">											';
-		echo '		<label for="inputPassword" class="col-md-3 control-label">Mot de passe: </label>			';
-		echo '		<div class="col-md-9">											';
-		echo '			<input type="password" class="form-control" id="inputPassword" placeholder="Mot de passe">	';
-		echo '		</div>													';
-		echo '		<div class="form-group">										';
-		echo '			<div class="col-md-offset-4 col-md-8">								';
-		echo '				<div class="checkbox">									';
-		echo '					<label>										';
-		echo '						<input type="checkbox">Se souvenir de moi.				';
-		echo '					</label>									';
-		echo '				</div>											';
-		echo '			</div>												';
-		echo '		</div>													';
-		echo '		<div class="form-group">										';
-		echo '		<div class="col-md-offset-8 col-md-4">									';
-		echo '			<button type="submit" class="btn btn-default">Se connecter</button>				';
-		echo '		</div>													';
-		echo '	</div>														';
-		echo '</form>														';
+		require('vue/form.login.php');
 	}
 	echo '</div>';
 
 	// Panier 
-
+	$panier = (NULL !== $_SESSION['panier']) ? $_SESSION['panier'] : NULL;
 	echo '<div class="col-md-12">';
-	if(isset($_SESSION['panier'])){
+	if(isset($panier))
+	{
 		echo '<div class="col-md-12">';
 		
-		foreach($_SESSION['panier'] as $i => $id){
-			echo '<a href="?page=shop&produit='. $id["idProduit"] .'">';
+		foreach($panier as $i => $id){
+			echo '<a href="?page=shop&produit='. $i .'">';
 			echo '<div class="col-md-1">'. $id["nb"] .'</div>';
 			echo '<div class="col-md-9">'. $id["nom"] .'</div>';
 			echo '<div class="col-md-1">'. $id["prix"] .'</div>';

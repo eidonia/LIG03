@@ -12,7 +12,6 @@ require_once('footer.php');
 
 $dTitre = "Bienvenue :)";
 $dContenu = $dContenu;
-$dFooter = $dFooter;
 
 require ("vue/template.php");
 

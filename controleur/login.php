@@ -1,5 +1,5 @@
 <?php
-include_once ('modele/User.class.php');
+include_once ('modele/Login.class.php');
 
 //TODO: User connecté?
 //Oui: On récupère les infos placé dans la session
@@ -8,40 +8,21 @@ include_once ('modele/User.class.php');
 //
 //TODO: NavBar dynamique
 
+// Test si les variable $_POST sont présentes
+$mail = (NULL !== $_POST["email"]) ? $_POST["email"] : NULL;
+$pass = (NULL !== $_POST["password"]) ? $_POST["password"] : NULL;
 
-function estConnecte()
+if(isset($mail) && isset($pass))
 {
-	$id = (NULL !== session_id()) ? session_id() : NULL;
-	if(isset($id))
-	{
-		$user = new User();
-		$user->getSessionId($id);
-		if($user->sessionID() == $id)
-			return True;
-		else
-			return False;
-	}
-	else
-	{
-		return False;
-	}
+	$user = new Login();
+	$user->checkLogin($mail, $pass);
+	$_SESSION["user"]["login"] = $user->login();
+	$_SESSION["user"]["id"] = $user->id();
+	$_SESSION["user"]["mail"] = $user->mail();
+	$_SESSION["user"]["prenom"] = $user->prenom();
+	$_SESSION["user"]["nom"] = $user->nom();
+	$_SESSION["user"]["avatar"] = $user->avatar();
 }
-
-
-function login($login, $pass)
-{
-	$login = isset($login) ? htmlspecialchars($login) : NULL;
-	$pass = isset($pass) ? htmlspecialchars($pass) : NULL;
-	$user = new User();
-	$user->getUserId($id);
-	if(($user->login() == $login) && ($user->pass() == $pass))
-	{
-		echo 'Bienvenu '. $user->prenom();
-		$user->setSessionID(session_id());
-	}
-	else
-	{
-		echo 'Veuillez réessayer';
-
-	}
+else{
+	$user = False;
 }

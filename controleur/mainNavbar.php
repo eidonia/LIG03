@@ -9,19 +9,6 @@ include_once ('controleur/login.php');
 //
 //TODO: NavBar dynamique
 
-if(isset($_SESSION['user']['id']))
-	{
-		if($id > 0)
-		{
-			$user = new User();
-			$user->getUser($id);
-			echo $user->login();
-		}
-		else
-		{
-			echo "ID user invalide";
-		}
-}
 genNavBar();
 
 function genNavBar()

@@ -46,7 +46,7 @@
 		<footer>
 		<hr>
 			<!-- Footer start -->
-			<?= footer($dFooter) ?>
+			<?= footer() ?>
 			<!-- Footer end-->
 		</footer>
 	</div>
