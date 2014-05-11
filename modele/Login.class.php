@@ -30,7 +30,7 @@ class Login extends User
 						$this->setAvatar($row['userAvatar']);
 						$this->setMail($mail);
 						$this->setSessionId($sessionID);
-						return $this;
+						return $true;
 					}
 					else
 					{

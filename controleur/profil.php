@@ -7,22 +7,28 @@ require_once('footer.php');
 
 if(isset($_GET["action"]))
 {
-	if($_GET["action"] == edit)
+	if($_GET["action"] == "edit")
 	{
 		$dTitre = "Mettre à jour votre profil";
 		$dContenu = "profilEdit.php";
 	}
-	elseif($_GET["action"] == view)
+	elseif($_GET["action"] == "view")
 	{
 		$dTitre = "Votre profil";
 		$dContenu = "profilView.php";
 	}
-	elseif($_GET["action"] == submit)
+	elseif($_GET["action"] == "submit")
 	{
 		$dTitre = "Mis à jour";
 		$dContenu = "profilUpdate.php";
 	}
-	else{
+	elseif($_GET["action"] == "new")
+	{
+		$dTitre = "Créer un compte";
+		$dContenu = "profilNew.php";
+	}
+	else
+	{
 		$dContenu = "main.php";
 	}
 }

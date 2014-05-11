@@ -4,10 +4,10 @@
 			<form class="form-horizontal" role="form" method="post" action="?page=profil&action=submit" enctype="multipart/form-data">
 				<div class="col-md-4">
 					<div class="col-md-12">
-						<img src="vue/image/<?= $user->avatar() ?>" alt="<?= $user->login() ?>" />
+						<img src="vue/image/<?= $imgAvatar ?>" alt="<?= $textAvatarAlt ?>" />
 					</div>
 					<div class="col-md-12">
-						<label for="avatar">Changer votre avatar</label>
+						<label for="avatar"><?= $textAvatar ?></label>
 						<input type="file" id="avatar" name="avatar">
 						<p class="help-block">(JPG, PNG ou GIF | max. 1Mo)</p>
 						<input type="hidden" name="MAX_FILE_SIZE" value="1048576">
@@ -55,13 +55,13 @@
 							<div class="form-group">
 								<label for="inputPassword" class="col-md-4 control-label">Mot de passe</label>
 								<div class="col-md-8">
-									<input type="password" class="form-control" id="inputPassword" placeholder="******" name="password">
+									<input type="password" class="form-control" id="inputPassword" placeholder="<?= $textPass ?>" name="password">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPasswordCheck" class="col-md-4 control-label">Vérification</label>
 								<div class="col-md-8">
-									<input type="password" class="form-control" id="inputPasswordCheck" placeholder="******" name="passwordCheck">
+								<input type="password" class="form-control" id="inputPasswordCheck" placeholder="<?= $textPassVerif ?>" name="passwordCheck">
 								</div>
 							</div>
 						</div>
@@ -75,7 +75,7 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-2">
-					<button type="submit" class="btn btn-primary">Envoyer</button>
+					<button type="submit" class="btn btn-success">Envoyer</button>
 				</div>
 			</form>
 		</div>
