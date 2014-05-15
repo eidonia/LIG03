@@ -28,7 +28,7 @@ else
 	$type = "danger";
 	$message = "L'adresse email est invalide";
 }
-$id = getLastFromDB("userId", "user");
+$id = getLastUserId();
 $id++;
 // Si un fichier à été envoyer on test la validitée du fichier. Sinon, on laisse un avatar par défaut.
 if($_FILES['avatar']['error'] == 0)

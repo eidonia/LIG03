@@ -16,12 +16,10 @@ include('sql.class.php');
 		else
 			return False;
 	}
-	function getLastFromDB($row, $table)
+	function getLastUserId()
 	{
-		$row = htmlspecialchars($row);
-		$table = htmlspecialchars($table);
 		$db = new PDOConfig();
-		$sql = 'SELECT MAX('. $row .') FROM '. $table;
+		$sql = 'SELECT MAX(userId) FROM user';
 		$res = $db->query($sql);
 		return $res;
 	}
