@@ -1,5 +1,5 @@
 <?php
-include('sql.class.php');
+include_once ('sql.class.php');
 
 	function is_password_valid($password = NULL, $passwordCheck = NULL)
 	{
@@ -19,8 +19,10 @@ include('sql.class.php');
 	function getLastUserId()
 	{
 		$db = new PDOConfig();
-		$sql = 'SELECT MAX(userId) FROM user';
-		$res = $db->query($sql);
-		return $res;
+		$sql = 'SELECT MAX(`userId`) as "id" FROM `user`';
+		$res = $db->prepare($sql);
+		$res->execute();
+		$id = $res->fetch();
+		return $id["id"];
 	}
 ?>

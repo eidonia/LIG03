@@ -39,7 +39,7 @@ if($_FILES['avatar']['error'] == 0)
 	if(in_array($extension_upload, $extensions_valides))
 	{
 		$nomAvatar = 'avatar/'. $id .'/'. uniqid(rand(), true) .'.'. $extension_upload;
-		mkdir('/vue/image/avatar/'. $id .'/', 0777, true);
+		mkdir('/vue/image/avatar/'. $id, 0777, true);
 		$resImg = move_uploaded_file($_FILES['avatar']['tmp_name'], 'vue/image/'.$nomAvatar);
 		$user->setAvatar($nomAvatar);
 		
@@ -52,7 +52,7 @@ if($_FILES['avatar']['error'] == 0)
 }
 else
 {
-	mkdir('/vue/image/avatar/'. $id .'/', 0777, true);
+	mkdir('/vue/image/avatar/'. $id, 0777, true);
 	$user->setAvatar("avatar/default.png");
 }
 
