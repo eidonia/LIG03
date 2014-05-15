@@ -11,7 +11,7 @@ $message = "Bienvenue :)";
 
 // Test la validité du mdp
 if(is_password_valid($_POST["password"], $_POST["passwordCheck"]))
-	$user->setPass($password);
+	$user->setPass($_POST["password"]);
 else
 {
 	$type = "danger";
@@ -44,8 +44,9 @@ if($type == "success")
 	$user->setAdresse($_POST["adresse"]);
 	$user->setCodePostale($_POST["codePostale"]);
 	$user->setPays($_POST["pays"]);
-
+	$user->setSessionID(session_id());
 	$id = $user->insert();
+	$user->getUser($id);
 	if($_FILES['avatar']['error'] == 0)
 	{
 		$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
@@ -54,9 +55,11 @@ if($type == "success")
 		if(in_array($extension_upload, $extensions_valides))
 		{
 			$nomAvatar = 'avatar/'. $id .'/'. uniqid(rand(), true) .'.'. $extension_upload;
-			mkdir('/vue/image/avatar/'. $id, 0777, true);
+			$path = 'vue/image/avatar/'. $id;
+			mkdir($path, 0777, true);
 			$resImg = move_uploaded_file($_FILES['avatar']['tmp_name'], 'vue/image/'.$nomAvatar);
 			$user->setAvatar($nomAvatar);
+			$user->update();
 			
 		}
 		else
@@ -67,7 +70,8 @@ if($type == "success")
 	}
 	else
 	{
-		mkdir('"/vue/image/avatar/'. $id .'"', 0777, true);
+		$path = 'vue/image/avatar/'. $id;
+		mkdir($path, 0777, true);
 		$user->setAvatar("avatar/default.png");
 	}
 	require ('vue/message.php');
