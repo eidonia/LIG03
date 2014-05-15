@@ -39,17 +39,20 @@ function blocDroit(){
 	{
 		
 		foreach($panier as $i => $id){
-			echo '<div class="col-md-12">';
-			echo '<a href="?page=shop&produit='. $i .'">';
-			echo '<div class="col-md-1">'. $id["nb"] .'</div>';
-			echo '<div class="col-md-8">'. $id["nom"] .'</div>';
-			echo '<div class="col-md-2">'. $id["prix"] .'</div>';
-			echo '</a>';
-			echo '<form role="form" method="post" action="?action=delfromcart">';
-			echo '<input type="hidden" name="id" value="'. $i .'">';
-			echo '<div class="col-md-1"><button type="submit" class="close" aria-hidden="true">&times;</button></div>';
-			echo '</form>';
-			echo '</div>';
+			if($id["nb"] > 0)
+			{
+				echo '<div class="col-md-12">';
+				echo '<a href="?page=shop&produit='. $i .'">';
+				echo '<div class="col-md-1">'. $id["nb"] .'</div>';
+				echo '<div class="col-md-8">'. $id["nom"] .'</div>';
+				echo '<div class="col-md-2">'. $id["prix"] .'</div>';
+				echo '</a>';
+				echo '<form role="form" method="post" action="?action=delfromcart">';
+				echo '<input type="hidden" name="id" value="'. $i .'">';
+				echo '<div class="col-md-1"><button type="submit" class="close" aria-hidden="true">&times;</button></div>';
+				echo '</form>';
+				echo '</div>';
+			}
 		}
 		
 	}
