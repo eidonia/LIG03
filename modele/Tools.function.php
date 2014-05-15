@@ -16,13 +16,4 @@ include_once ('sql.class.php');
 		else
 			return False;
 	}
-	function getLastUserId()
-	{
-		$db = new PDOConfig();
-		$sql = 'SELECT MAX(`userId`) as "id" FROM `user`';
-		$res = $db->prepare($sql);
-		$res->execute();
-		$id = $res->fetch();
-		return $id["id"];
-	}
 ?>
