@@ -1,6 +1,6 @@
 <?php
 
-// require "../modele/class.produit.php";
+//require "../modele/class.produit.php";
 require_once("titre.php");
 require_once("blocdroit.php");
 require_once("footer.php");

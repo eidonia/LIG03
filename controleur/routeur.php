@@ -3,7 +3,7 @@
 
 // Test de session
 	$dContenu = array (
-		"1" => array("titre" => "Coucou", "contenu" => "message description", "date" => "10/19/29", "numCommentaire" => "12"),
+		"1" => array("titre" => "kéké", "contenu" => "message description", "date" => "10/19/29", "numCommentaire" => "12"),
 		"2" => array("titre" => "Kiki", "contenu" => "Caca", "date" => "10/32/2282", "numCommentaire" => "12")
 		);
 

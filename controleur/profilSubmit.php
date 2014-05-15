@@ -3,7 +3,6 @@ require_once('modele/User.class.php');
 require_once('modele/rfc822.php');
 require_once('modele/Tools.function.php');
 
-var_dump($_POST);
 $user = new User();
 
 $type = "success";
