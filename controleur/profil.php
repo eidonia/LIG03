@@ -29,7 +29,7 @@ if(isset($_GET["action"]))
 	{
 		if($_GET["type"] == "submit")
 		{
-			$dTitre = "Créer votre iueuieueicompte";
+			$dTitre = "Créer votre compte";
 			$dContenu = "profilSubmit.php";
 		}
 		else

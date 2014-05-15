@@ -22,7 +22,7 @@
 	<div class="form-group">
 		<div class="col-md-4">
 			<a href="?page=profil&action=new">
-				<boutton type="button" class="btn btn-primary">Nouveau compte</button>
+				<button type="button" class="btn btn-primary">Nouveau compte</button>
 			</a>
 		</div>
 		<div class="col-md-offset-4 col-md-4">
