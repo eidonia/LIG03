@@ -24,8 +24,9 @@ if((NULL !== $mail) && (NULL !== $pass))
 		$_SESSION["user"]["prenom"] = $user->prenom();
 		$_SESSION["user"]["nom"] = $user->nom();
 		$_SESSION["user"]["avatar"] = $user->avatar();
+		session_id($user->sessionID());
 	}
 }
 else{
-
+	
 }

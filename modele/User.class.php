@@ -193,5 +193,7 @@ class User
 			.'"'. $this->sessionID() .'")';
 		var_dump($sql);
 		$db->exec($sql);
+		$id = $db->lastInsertID();
+		return $id;
 	}
 }

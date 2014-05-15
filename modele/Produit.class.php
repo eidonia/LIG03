@@ -92,6 +92,7 @@ class Produit
 					$this->setNom($row['nom']);
 					$this->setDescription($row['description']);
 					$this->setPrix($row['prix']);
+					$this->setImage($row['image']);
 					$this->setStock($row['stock']);
 					$this->setCategorieID($row['categorieID']);
 				}	
