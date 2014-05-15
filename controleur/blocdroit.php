@@ -1,17 +1,16 @@
 <?php
 require_once ('controleur/login.php');
-var_dump($_SESSION);
 if($_GET["action"] == "delfromcart")
 {
 	$id = $_POST["id"];
 	$id = (int)$id;
         if($id > 0)
         {
-		if((int)$_SESSION["panier"][$id]["nb"] > 0)
+		if((int)$_SESSION["panier"][$id]["nb"] > 1)
 			$_SESSION["panier"][$id]["nb"] -= 1;
                 else
-                {
-                        $_SESSION["panier"][$id] = NULL;
+		{
+			$_SESSION["panier"][$id] = NULL;
                 }
         }
 }
@@ -54,7 +53,11 @@ function blocDroit(){
 				echo '</div>';
 			}
 		}
-		
+		echo	'<div class="row">'
+			.'	<div class="col-md-8-offset">'
+			.'	<form role="form" method="post" action="?page=panier&action=order">'
+			.'	<button type="submit" class="btn btn-success">Commander</button>'
+			.'	</div>';	
 	}
 	else{
 		echo '<div class="col-md-12">';
