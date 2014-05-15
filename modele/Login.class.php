@@ -10,7 +10,7 @@ class Login extends User
 		if(isset($mail) && isset($pass))
 	        {
 			$db = new PDOConfig();
-			$sql = 'SELECT userId, userLogin, userNom, userPrenom, userAdresse,'
+			$sql = 'SELECT userId, userNom, userPrenom, userAdresse,'
 			.' userCodePostale, userVille, userPays, userAvatar'
 			.' FROM user WHERE userMail = "'. $mail .'" AND userPass = "'. $pass .'"';
 			try{
@@ -19,7 +19,6 @@ class Login extends User
 					if(isset($row))
 					{
 						$this->setId($row['userId']);
-						$this->setLogin($row['userLogin']);
 						$this->setPass($pass);
 						$this->setNom($row['userNom']);
 						$this->setPrenom($row['userPrenom']);
@@ -30,7 +29,7 @@ class Login extends User
 						$this->setAvatar($row['userAvatar']);
 						$this->setMail($mail);
 						$this->setSessionId($sessionID);
-						return $true;
+						return $this;
 					}
 					else
 					{
@@ -53,7 +52,7 @@ class Login extends User
 	        if(isset($id))
 	        {
 			$db = new PDOConfig();
-			$sql = 'SELECT userId, userLogin, userPass, userNom, userPrenom, userAdresse,'
+			$sql = 'SELECT userId, userPass, userNom, userPrenom, userAdresse,'
 			.' userCodePostale, userVille, userPays, userAvatar, userMail'
 			.' FROM user WHERE userSessionID = '. $id;
 			try{
@@ -61,7 +60,6 @@ class Login extends User
 				{
 					if(isset($row))
 					{
-						$this->setLogin($row['userLogin']);
 						$this->setPass($row['userPass']);
 						$this->setNom($row['userNom']);
 						$this->setPrenom($row['userPrenom']);

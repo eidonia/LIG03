@@ -9,23 +9,34 @@ if(isset($_GET["action"]))
 {
 	if($_GET["action"] == "edit")
 	{
-		$dTitre = "Mettre à jour votre profil";
-		$dContenu = "profilEdit.php";
+		if($_GET["type"] == "submit")
+		{
+			$dTitre = "Mis à jour";
+			$dContenu = "profilUpdate.php";
+		}
+		else
+		{
+			$dTitre = "Mettre à jour votre profil";
+			$dContenu = "profilEdit.php";
+		}
 	}
 	elseif($_GET["action"] == "view")
 	{
 		$dTitre = "Votre profil";
 		$dContenu = "profilView.php";
 	}
-	elseif($_GET["action"] == "submit")
-	{
-		$dTitre = "Mis à jour";
-		$dContenu = "profilUpdate.php";
-	}
 	elseif($_GET["action"] == "new")
 	{
-		$dTitre = "Créer un compte";
-		$dContenu = "profilNew.php";
+		if($_GET["type"] == "submit")
+		{
+			$dTitre = "Créer votre iueuieueicompte";
+			$dContenu = "profilSubmit.php";
+		}
+		else
+		{
+			$dTitre = "Créer un compte";
+			$dContenu = "profilNew.php";
+		}
 	}
 	else
 	{

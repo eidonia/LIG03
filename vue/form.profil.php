@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
-			<form class="form-horizontal" role="form" method="post" action="?page=profil&action=submit" enctype="multipart/form-data">
+			<form class="form-horizontal" role="form" method="post" action="?page=profil&action=<?= $action ?>&type=<?= $type ?>" enctype="multipart/form-data">
 				<div class="col-md-4">
 					<div class="col-md-12">
 						<img src="vue/image/<?= $imgAvatar ?>" alt="<?= $textAvatarAlt ?>" />

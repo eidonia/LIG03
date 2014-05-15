@@ -15,6 +15,10 @@ $textAvatar = "Insérer un avatar";
 $textAvatarAlt = "Avatar";
 $imgAvatar = "avatar/default.png";
 
+// Paramètre à passer au GET
+$action = "new";
+$type = "submit";
+
 require ('vue/form.profil.php');
 
 ?>

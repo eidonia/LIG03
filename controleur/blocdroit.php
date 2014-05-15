@@ -8,8 +8,7 @@ function blocDroit(){
 	echo '<div class="col-md-12">';
 	// BLOC LOGIN
 	// Connecté ?
-
-	if(NULL !== $_SESSION["user"])
+	if(NULL !== $_SESSION["user"]["id"])
 	{
 		require('vue/logged.php');
 	}

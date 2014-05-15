@@ -4,7 +4,6 @@ require_once('sql.class.php');
 class User
 {
 	private $_id;
-	private $_login;
 	private $_pass;
 	private $_nom;
 	private $_prenom;
@@ -23,10 +22,6 @@ class User
 	public function id()
 	{
 		return $this->_id;
-	}
-	public function login()
-	{
-		return $this->_login;
 	}
 	public function pass()
 	{
@@ -72,10 +67,6 @@ class User
 	public function setId($val)
 	{
 		$this->_id = $val;
-	}
-	public function setLogin($val)
-	{
-		$this->_login = $val;
 	}
 	public function setPass($val)
 	{
@@ -126,14 +117,13 @@ class User
 		if(isset($id))
 		{
 			$this->setId($id);
-			$sql = 'SELECT userLogin, userPass, userNom, userPrenom, userAdresse,'
+			$sql = 'SELECT userPass, userNom, userPrenom, userAdresse,'
 			.' userCodePostale, userVille, userPays, userAvatar, userSessionID, userMail'
 			.' FROM user WHERE userId = '. $this->id();
 			foreach($db->query($sql) as $row)
 			{
 				if(isset($row))
 				{
-					$this->setLogin($row['userLogin']);
 					$this->setPass($row['userPass']);
 					$this->setNom($row['userNom']);
 					$this->setPrenom($row['userPrenom']);
@@ -159,7 +149,7 @@ class User
 		$db = new PDOConfig();
 		$offset = isset($offset) ? (int) $offset : 0;
 		$limit = isset($limit) ? (int)$limit : 10;
-		$sql = 'SELECT userId, userLogin, userPass, userNom, userPrenom, userAdresse,'
+		$sql = 'SELECT userId, userPass, userNom, userPrenom, userAdresse,'
 		.' userCodePostale, userVille, userPays, userGroup, userAvatar FROM user ORDER BY id DESC LIMIT '. $offset .','. $limit;
 		$db->query($sql);
 		$list = $db->fetchAll();
@@ -170,7 +160,6 @@ class User
 	{
 		$db = new PDOConfig();
 		$sql =	'UPDATE user SET'
-			.' userLogin = "'. $this->login() .'",'
 			.' userPass = "'. $this->pass() .'",'
 			.' userPrenom = "'. $this->prenom() .'",'
 			.' userNom = "'. $this->nom() .'",'
@@ -190,10 +179,9 @@ class User
 	{
 		$db = new PDOConfig();
 		$sql =	'INSERT INTO user'
-			.'(userLogin, userPass, userPrenom, userNom, userMail, userAdresse, userVille, userCodePostale, userPays, userAvatar, userSessionID)'
+			.'(userPass, userPrenom, userNom, userMail, userAdresse, userVille, userCodePostale, userPays, userAvatar, userSessionID)'
 			.' VALUES '
-			.'("'. $this->login() .'", '
-			.'"'. $this->pass() .'", '
+			.'("'. $this->pass() .'", '
 			.'"'. $this->prenom() .'", '
 			.'"'. $this->nom() .'", '
 			.'"'. $this->mail() .'", '
@@ -202,8 +190,8 @@ class User
 			.'"'. $this->codePostale() .'", '
 			.'"'. $this->pays() .'", '
 			.'"'. $this->avatar() .'", '
-			.'"'. $this->sessionID() .')';
+			.'"'. $this->sessionID() .'")';
 		var_dump($sql);
-		//$db->exec($sql);
+		$db->exec($sql);
 	}
 }

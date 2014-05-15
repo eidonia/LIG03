@@ -8,6 +8,12 @@ $textPassVerif = "Veuillez confirmer votre nouveau mot de passe";
 $textAvatar = "Votre avatar";
 $textAvatarAlt = "Avatar";
 $imgAvatar = $user->avatar();
+
+
+// Pararmètre pour le GET
+$action = "edit";
+$type = "submit";
+
 require ('vue/form.profil.php');
 
 ?>
